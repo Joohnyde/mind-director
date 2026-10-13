@@ -1,0 +1,132 @@
+
+# ============================================================
+# Build Artifacts
+# ============================================================
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.jmod
+
+# Maven
+target/
+dependency-reduced-pom.xml
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+
+# Gradle
+.gradle/
+build/
+out/
+
+# Preserve Gradle wrapper and source directories
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+
+# ============================================================
+# IDEs & Editors
+# ============================================================
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+nbactions*.xml
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+bin/
+
+# VS Code
+.vscode/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+
+
+# ============================================================
+# Python & OCR
+# ============================================================
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Packaging
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+.pybuild/
+
+# OCR generated data
+/ocr/output/
+/ocr/temp/
+/ocr/cache/
+/ocr/debug/
+*.traineddata.bak
+
+
+# ============================================================
+# Logs, Crashes & Temporary Files
+# ============================================================
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.pid
+hs_err_pid*
+replay_pid*
+
+
+# ============================================================
+# Secrets & Local Configuration
+# ============================================================
+
+.env
+.env.*
+!.env.example
+*.local.properties
+secrets/
+
+
+# ============================================================
+# Operating System
+# ============================================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
