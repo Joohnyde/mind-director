@@ -14,16 +14,16 @@ import java.util.stream.Collectors;
  */
 public class DuelHandler implements EventHandler{
 
-   
+
     private final LinkedHashSet<Integer> set = new LinkedHashSet<>();
 
     @Override
     public void handlePlayerPick(final int playerIndex) {
-        if (set.contains(playerIndex)) {
-            set.remove(playerIndex);
-            return;
-        }
+      if (set.contains(playerIndex)) {
+        set.remove(playerIndex);
+      } else {
         set.addLast(playerIndex);
+      }
     }
 
     @Override
@@ -59,11 +59,11 @@ public class DuelHandler implements EventHandler{
     private void showThree() {
         System.out.println("Showing three dueled players " + printSet());
     }
-    
+
     @Override
     public void onEnter(){
         set.clear();
         EventHandler.super.onEnter();
     }
-    
+
 }

@@ -5,7 +5,8 @@
 package com.cevapinxile.minddirector;
 
 import com.cevapinxile.minddirector.input.KeyboardListener;
-import com.github.kwhat.jnativehook.NativeHookException;
+import com.cevapinxile.minddirector.obs.ObsScene;
+import com.cevapinxile.minddirector.obs.ObsService;
 
 /**
  *
@@ -13,7 +14,11 @@ import com.github.kwhat.jnativehook.NativeHookException;
  */
 public class Main {
 
-    public static void main(String[] args) throws NativeHookException {
+    public static void main(String[] args) {
+//        System.setProperty(
+//          "org.slf4j.simpleLogger.log.io.obswebsocket.community.client",
+//          "warn"
+//        );
         KeyboardListener.getInstance().registerListener();
     }
-}
+}//C4231

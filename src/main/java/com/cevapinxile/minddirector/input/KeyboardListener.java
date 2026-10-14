@@ -70,17 +70,11 @@ public final class KeyboardListener implements NativeKeyListener {
             inputController.confirm();
             return;
         }
-        /* 
-        "Illegal" codes:
-            5,6,7,8,9,0 -> Tolerate it as an honest mistake
-            Any other character -> Reset input
-        */
-        if (NativeKeyEvent.VC_5 <= keyCode && keyCode <= NativeKeyEvent.VC_0){ //VC_0 is labeled 11
-            // Do nothing. 
-            return;
+
+        // Escape cancels the state
+        if (keyCode == NativeKeyEvent.VC_ESCAPE){
+            inputController.idle();
         }
-                
-        inputController.idle();
     }
     public void forceDisableCapsLock() {
         try {

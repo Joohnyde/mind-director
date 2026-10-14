@@ -5,24 +5,23 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import com.cevapinxile.minddirector.obs.ObsScene;
+import com.cevapinxile.minddirector.obs.ObsService;
 
 /**
  *
  * @author denijal
  */
-public class AllHandler implements EventHandler{
+public class AllHandler implements EventHandler {
 
-    @Override
-    public void handlePlayerPick(int index) {
-        // Nothing to select
-    }
+  @Override
+  public void handlePlayerPick(int index) {
+    // Nothing to select
+  }
 
-    @Override
-    public boolean handleReturn() {
-        // TODO: OBS
-        return true; // Always allowed
-    }
+  @Override
+  public void onEnter() {
+    ObsService.getInstance().prepareScene(ObsScene.All);
+  }
 
-    
-    
 }
