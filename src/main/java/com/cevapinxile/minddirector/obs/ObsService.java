@@ -12,7 +12,6 @@ import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
 public class ObsService {
 
   private static final ObsService INSTANCE = new ObsService();
-  private static final String SCENE_TYPE = "OBS_SOURCE_TYPE_SCENE";
   public static final Integer DEFAULT_TIMEOUT = 100;
 
   private ObsService() {
@@ -46,9 +45,9 @@ public class ObsService {
     if (scene == null) {
       return;
     }
-    controller.setCurrentProgramScene(Temp.toString(), DEFAULT_TIMEOUT);
     controller.removeScene(scene.toString(), DEFAULT_TIMEOUT);
     controller.setSceneName(Temp.toString(), scene.toString(), DEFAULT_TIMEOUT);
+    controller.setCurrentProgramScene(scene.toString(), DEFAULT_TIMEOUT);
     scene = null;
   }
 
@@ -81,16 +80,6 @@ public class ObsService {
                                     transform.getBoundsHeight() :
                                     null)
                     .build();
-  }
-
-  public void printSceneItems(ObsScene scene, String label) {
-    System.out.println("\n========== " + label + " ==========");
-
-    controller.getSceneItemList(scene.toString(), DEFAULT_TIMEOUT)
-              .getSceneItems()
-              .forEach(item -> System.out.printf("ID: %d | Index: %d | Source: %s\n", item.getSceneItemId(),
-                                                 item.getSceneItemIndex(), item.getSourceName()));
-    System.out.println("====================================\n");
   }
 
   public void replaceSceneItemByIndex(ObsScene scene, int index, String newSource) {

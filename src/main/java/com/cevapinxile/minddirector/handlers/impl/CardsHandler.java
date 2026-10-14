@@ -9,7 +9,6 @@ import com.cevapinxile.minddirector.obs.ObsService;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 import static com.cevapinxile.minddirector.model.GameState.NUMBER_OF_PLAYERS;
 import static com.cevapinxile.minddirector.obs.ObsScene.Cards;
@@ -21,81 +20,77 @@ import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
  */
 public class CardsHandler implements EventHandler {
 
-  private final LinkedHashSet<Integer> set = new LinkedHashSet<>();
-  private final ObsService obs = ObsService.getInstance();
+    private final LinkedHashSet<Integer> set = new LinkedHashSet<>();
+    private final ObsService obs = ObsService.getInstance();
 
-  @Override
-  public void handlePlayerPick(final int playerIndex) {
-    for (int i = 0; i < 10; i++) {
-      obs.setVisibilty(Temp, i, false);
+    @Override
+    public void handlePlayerPick(final int playerIndex) {
+        for (int i = 0; i < 10; i++) {
+            obs.setVisibilty(Temp, i, false);
+        }
+
+        if (set.contains(playerIndex)) {
+            set.remove(playerIndex);
+        } else {
+            set.addLast(playerIndex);
+        }
+
+        switch (set.size()) {
+            case 1 -> showOne();
+            case 2 -> showTwo();
+            case 3 -> showThree();
+            default -> showAll();
+        }
     }
 
-    if (set.contains(playerIndex)) {
-      set.remove(playerIndex);
-    } else {
-      set.addLast(playerIndex);
+    @Override
+    public boolean handleReturn() {
+        obs.commit();
+        return true; // Always allowed
     }
 
-    switch (set.size()) {
-      case 1:
-      case 2:
-        showOneOrTwo();
-        break;
-      case 3:
-        showThree();
-        break;
-      default:
-        showAll();
-        break;
-    }
-  }
-
-  @Override
-  public boolean handleReturn() {
-    obs.commit();
-    return true; // Always allowed
-  }
-
-  private void showAll() {
-    Iterator<Integer> iterator = set.iterator();
-    for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-      if (iterator.hasNext()) {
-        obs.replaceSceneItemByIndex(Temp, i, "Card" + (iterator.next() + 1));
-      }
-      obs.setVisibilty(Temp, i, true);
-    }
-  }
-
-  private void showOneOrTwo() {
-    Iterator<Integer> iterator = set.iterator();
-    for (int i = 0; i < set.size(); i++) {
-      final int index = 3 + i + set.size();
-      obs.replaceSceneItemByIndex(Temp, index, "Card" + (iterator.next() + 1));
-      obs.setVisibilty(Temp, index, true);
-    }
-  }
-
-  private void showThree() {
-    final Iterator<Integer> iterator = set.iterator();
-    final int first = iterator.next() + 1;
-    final int second = iterator.next() + 1;
-    final int third = iterator.next() + 1;
-
-    obs.replaceSceneItemByIndex(Temp, 7, "Card" + first);
-    obs.replaceSceneItemByIndex(Temp, 9, "C3PB" + second);
-    obs.replaceSceneItemByIndex(Temp, 8, "Card" + third);
-    for (int i = 7; i <= 9; i++)
-      obs.setVisibilty(Temp, i, true);
-  }
-
-  @Override
-  public void onEnter() {
-    set.clear();
-    obs.prepareScene(Cards);
-    for (int i = 0; i < 10; i++) {
-      obs.setVisibilty(Temp, i, i <= 3);
+    private void showAll() {
+        Iterator<Integer> iterator = set.iterator();
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if (iterator.hasNext()) {
+                obs.replaceSceneItemByIndex(Temp, i, "Card" + (iterator.next() + 1));
+            }
+            obs.setVisibilty(Temp, i, true);
+        }
     }
 
-  }
+    private void showOne() {
+        replaceAndShow(4, "Card" + (set.getFirst() + 1));
+    }
+
+    private void showTwo() {
+        replaceAndShow(5, "C2P" + (set.getFirst() + 1));
+        replaceAndShow(6, "C2P" + (set.getLast() + 1));
+    }
+
+    private void showThree() {
+        final Iterator<Integer> iterator = set.iterator();
+        final int first = iterator.next() + 1;
+        final int second = iterator.next() + 1;
+        final int third = iterator.next() + 1;
+
+        replaceAndShow(7, "Card" + first);
+        replaceAndShow(9, "C3P" + second);
+        replaceAndShow(8, "Card" + third);
+    }
+
+    private void replaceAndShow(final int index, final String source) {
+        obs.replaceSceneItemByIndex(Temp, index, source);
+        obs.setVisibilty(Temp, index, true);
+    }
+
+    @Override
+    public void onEnter() {
+        set.clear();
+        obs.prepareScene(Cards);
+        for (int i = 0; i < 10; i++) {
+            obs.setVisibilty(Temp, i, i <= 3);
+        }
+    }
 
 }

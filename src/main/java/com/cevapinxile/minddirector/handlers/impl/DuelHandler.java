@@ -5,65 +5,88 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import static com.cevapinxile.minddirector.model.GameState.NUMBER_OF_PLAYERS;
+import static com.cevapinxile.minddirector.obs.ObsScene.Duel;
+import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
+import com.cevapinxile.minddirector.obs.ObsService;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 /**
  *
  * @author denijal
  */
-public class DuelHandler implements EventHandler{
-
+public class DuelHandler implements EventHandler {
 
     private final LinkedHashSet<Integer> set = new LinkedHashSet<>();
+    private final ObsService obs = ObsService.getInstance();
 
     @Override
     public void handlePlayerPick(final int playerIndex) {
-      if (set.contains(playerIndex)) {
-        set.remove(playerIndex);
-      } else {
-        set.addLast(playerIndex);
-      }
+        for (int i = 0; i < 9; i++) {
+            obs.setVisibilty(Temp, i, false);
+        }
+
+        if (set.contains(playerIndex)) {
+            set.remove(playerIndex);
+        } else {
+            set.addLast(playerIndex);
+        }
+
+        switch (set.size()) {
+            case 1 -> showOne();
+            case 2 -> showTwo();
+            case 3 -> showThree();
+            default -> showAll();
+        }
     }
 
     @Override
     public boolean handleReturn() {
-        switch (set.size()) {
-            case 1 ->
-            {
-                return false;
-            }
-            case 2 ->
-                showTwo();
-            case 3 ->
-                showThree();
-            default ->
-                showAll();
+        if (set.size() == 1) {
+            return false;
         }
-
+        obs.commit();
         return true;
     }
 
-    private String printSet() {
-        return set.stream().map(String::valueOf).collect(Collectors.joining(", "));
+    private void showAll() {
+        Iterator<Integer> iterator = set.iterator();
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if (iterator.hasNext()) {
+                obs.replaceSceneItemByIndex(Temp, i, "Player" + (iterator.next() + 1));
+            }
+            obs.setVisibilty(Temp, i, true);
+        }
     }
 
-    private void showAll() {
-        System.out.println("Showing all dueled players in order " + printSet());
+    private void showOne() {
+        replaceAndShow(4, "Player" + (set.getFirst() + 1));
     }
 
     private void showTwo() {
-        System.out.println("Showing the both dueled players, " + set.getFirst() + " and " + set.getLast());
+        replaceAndShow(4, "Player" + (set.getFirst() + 1));
+        replaceAndShow(5, "D2P" + (set.getLast()+ 1));
     }
 
     private void showThree() {
-        System.out.println("Showing three dueled players " + printSet());
+        final Iterator<Integer> iterator = set.iterator();
+        for (int i = 6; iterator.hasNext(); i++) {
+            replaceAndShow(i, "Player" + (iterator.next() + 1));
+        }
+    }
+
+    private void replaceAndShow(final int index, final String source) {
+        obs.replaceSceneItemByIndex(Temp, index, source);
+        obs.setVisibilty(Temp, index, true);
     }
 
     @Override
-    public void onEnter(){
+    public void onEnter() {
         set.clear();
-        EventHandler.super.onEnter();
+        obs.prepareScene(Duel);
+        for (int i = 0; i < 9; i++) {
+            obs.setVisibilty(Temp, i, i <= 3);
+        }
     }
-
 }
