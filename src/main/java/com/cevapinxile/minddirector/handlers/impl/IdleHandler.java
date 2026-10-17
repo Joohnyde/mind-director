@@ -5,6 +5,10 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import static com.cevapinxile.minddirector.obs.ObsScene.Full;
+import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
+
+import com.cevapinxile.minddirector.obs.ObsService;
 
 /**
  *
@@ -13,10 +17,13 @@ import com.cevapinxile.minddirector.handlers.EventHandler;
 public class IdleHandler implements EventHandler {
 
     private Integer player = -1;
+    private final ObsService obs = ObsService.getInstance();
 
     @Override
-    public void handlePlayerPick(int index) {
-        player = (player == index) ? -1 : index;
+    public void handlePlayerPick(final int index) {
+        player = index;
+        obs.prepareScene(Full);
+        obs.replaceSceneItemByIndex(Temp, 0, "Player" + (index + 1));
     }
 
     @Override
@@ -24,15 +31,14 @@ public class IdleHandler implements EventHandler {
         if (player == -1) {
             return false;
         }
-        System.out.println("Single full-screen of " + player);
+        obs.commit();
         return true;
     }
-    
-    
+
     @Override
     public void onEnter(){
         player = -1;
-        EventHandler.super.onEnter();
+        obs.reset();
     }
 
 }

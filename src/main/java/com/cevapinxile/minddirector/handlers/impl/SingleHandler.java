@@ -5,33 +5,39 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import com.cevapinxile.minddirector.obs.ObsService;
+
+import static com.cevapinxile.minddirector.obs.ObsScene.Single;
+import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
 
 /**
  *
  * @author denijal
  */
-public class SingleHandler implements EventHandler{
+public class SingleHandler implements EventHandler {
 
-    private Integer player = null;
+  private final ObsService obs = ObsService.getInstance();
+  private Integer player = null;
 
-    @Override
-    public void handlePlayerPick(int index) {
-        player = (player == index) ? null : index;
+  @Override
+  public void handlePlayerPick(int index) {
+    player = index;
+    obs.replaceSceneItemByIndex(Temp, 0, "Player" + (index + 1));
+  }
+
+  @Override
+  public boolean handleReturn() {
+    if (player == null) {
+      return false;
     }
+    obs.commit();
+    return true;
+  }
 
-    @Override
-    public boolean handleReturn() {
-        if (player == null) {
-            return false;
-        }
-        System.out.println("Overhead view + player #" + player);
-        return true;
-    }  
-     
-    @Override
-    public void onEnter(){
-        player = -1;
-        EventHandler.super.onEnter();
-    }
-    
+  @Override
+  public void onEnter() {
+    player = -1;
+    obs.prepareScene(Single);
+  }
+
 }

@@ -5,8 +5,14 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import com.cevapinxile.minddirector.obs.ObsService;
+
+import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
+
+import static com.cevapinxile.minddirector.model.GameState.NUMBER_OF_PLAYERS;
+import static com.cevapinxile.minddirector.obs.ObsScene.Cards;
+import static com.cevapinxile.minddirector.obs.ObsScene.Temp;
 
 /**
  *
@@ -15,55 +21,76 @@ import java.util.stream.Collectors;
 public class CardsHandler implements EventHandler {
 
     private final LinkedHashSet<Integer> set = new LinkedHashSet<>();
+    private final ObsService obs = ObsService.getInstance();
 
     @Override
     public void handlePlayerPick(final int playerIndex) {
+        for (int i = 0; i < 10; i++) {
+            obs.setVisibilty(Temp, i, false);
+        }
+
         if (set.contains(playerIndex)) {
             set.remove(playerIndex);
-            return;
+        } else {
+            set.addLast(playerIndex);
         }
-        set.addLast(playerIndex);
+
+        switch (set.size()) {
+            case 1 -> showOne();
+            case 2 -> showTwo();
+            case 3 -> showThree();
+            default -> showAll();
+        }
     }
 
     @Override
     public boolean handleReturn() {
-        switch (set.size()) {
-            case 1 ->
-                showOne();
-            case 2 ->
-                showTwo();
-            case 3 ->
-                showThree();
-            default ->
-                showAll();
-        }
-
+        obs.commit();
         return true; // Always allowed
     }
 
-    private String printSet() {
-        return set.stream().map(String::valueOf).collect(Collectors.joining(", "));
-    }
-
     private void showAll() {
-        System.out.println("Showing all cards in order " + printSet());
+        Iterator<Integer> iterator = set.iterator();
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            if (iterator.hasNext()) {
+                obs.replaceSceneItemByIndex(Temp, i, "Card" + (iterator.next() + 1));
+            }
+            obs.setVisibilty(Temp, i, true);
+        }
     }
 
     private void showOne() {
-        System.out.println("Showing only the card of: " + set.getFirst());
+        replaceAndShow(4, "Card" + (set.getFirst() + 1));
     }
 
     private void showTwo() {
-        System.out.println("Showing the cards of both " + set.getFirst() + " and " + set.getLast());
+        replaceAndShow(5, "C2P" + (set.getFirst() + 1));
+        replaceAndShow(6, "C2P" + (set.getLast() + 1));
     }
 
     private void showThree() {
-        System.out.println("Showing the cards of " + printSet());
+        final Iterator<Integer> iterator = set.iterator();
+        final int first = iterator.next() + 1;
+        final int second = iterator.next() + 1;
+        final int third = iterator.next() + 1;
+
+        replaceAndShow(7, "Card" + first);
+        replaceAndShow(9, "C3P" + second);
+        replaceAndShow(8, "Card" + third);
+    }
+
+    private void replaceAndShow(final int index, final String source) {
+        obs.replaceSceneItemByIndex(Temp, index, source);
+        obs.setVisibilty(Temp, index, true);
     }
 
     @Override
-    public void onEnter(){
+    public void onEnter() {
         set.clear();
-        EventHandler.super.onEnter();
+        obs.prepareScene(Cards);
+        for (int i = 0; i < 10; i++) {
+            obs.setVisibilty(Temp, i, i <= 3);
+        }
     }
+
 }

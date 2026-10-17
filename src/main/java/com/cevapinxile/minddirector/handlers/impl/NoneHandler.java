@@ -5,6 +5,7 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.handlers.EventHandler;
+import com.cevapinxile.minddirector.obs.ObsService;
 
 /**
  *
@@ -20,5 +21,9 @@ public class NoneHandler implements EventHandler {
     public boolean handleReturn() {
         return true;
     }
-    
+
+    @Override
+    public void onEnter(){
+        ObsService.getInstance().reset();
+    }
 }
