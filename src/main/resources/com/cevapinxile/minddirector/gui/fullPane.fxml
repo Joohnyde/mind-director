@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="568.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="311.0" layoutY="14.0" text="ON SCREEN">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="CENTER" layoutX="14.0" layoutY="46.0" prefHeight="467.0" prefWidth="715.0" style="-fx-alignment: center; -fx-background-color: #593340;" text="DENIJAL" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_1_selected.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="90.0" text="Denijal">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/me.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="235.0" text="Khrystyna">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/ua.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_3.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="384.0" text="Filip">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/ba.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_4.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="529.0" text="Lara">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="530.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/rs.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

@@ -4,6 +4,8 @@
  */
 package com.cevapinxile.minddirector.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author denijal
@@ -11,5 +13,6 @@ package com.cevapinxile.minddirector.model;
 public class GameState {
     
     public static final Integer NUMBER_OF_PLAYERS = 4;
+    public static final ArrayList<Player> PLAYERS = new ArrayList<>();
     
 }

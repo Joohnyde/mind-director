@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="568.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="14.0" layoutY="48.0" prefHeight="468.0" prefWidth="718.0" visible="false">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="470.0" prefWidth="720.0" style="-fx-alignment: center; -fx-background-color: #593340;" text="DENIJAL" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Pane layoutX="14.0" layoutY="48.0" prefHeight="468.0" prefWidth="718.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="468.0" prefWidth="433.0" style="-fx-alignment: center; -fx-background-color: #593340;" text="DENIJAL" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="468.0" fitWidth="481.0" layoutX="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@d2p2.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="360.0" prefHeight="468.0" prefWidth="371.0" style="-fx-alignment: center;" text="KHRYSTYNA" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="58.0" prefHeight="468.0" prefWidth="718.0" visible="false">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="470.0" prefWidth="360.0" style="-fx-alignment: center; -fx-background-color: #593340;" text="DENIJAL" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="360.0" prefHeight="234.0" prefWidth="360.0" style="-fx-alignment: center; -fx-background-color: #472955;" text="KHRYSTYNA" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="360.0" layoutY="234.0" prefHeight="234.0" prefWidth="360.0" style="-fx-alignment: center; -fx-background-color: #53471e;" text="FILIP" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="48.0" prefHeight="468.0" prefWidth="718.0" visible="false">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="234.0" prefWidth="359.0" style="-fx-alignment: center; -fx-background-color: #593340;" text="DENIJAL" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="359.0" prefHeight="234.0" prefWidth="359.0" style="-fx-alignment: center; -fx-background-color: #472955;" text="KHRYSTYNA" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutY="234.0" prefHeight="234.0" prefWidth="359.0" style="-fx-alignment: center; -fx-background-color: #53471e;" text="FILIP" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="359.0" layoutY="234.0" prefHeight="234.0" prefWidth="359.0" style="-fx-alignment: center; -fx-background-color: #1c464e;" text="LARA" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="311.0" layoutY="14.0" text="ON SCREEN">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_1_selected.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="90.0" text="Denijal">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/me.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_2_selected.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="235.0" text="Khrystyna">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/ua.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_3_selected.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="384.0" text="Filip">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/ba.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="773.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@avatars/avatar_4_selected.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="789.0" layoutY="529.0" text="Lara">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="757.0" layoutY="530.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@flags/rs.png" />
+         </image>
+      </ImageView>
+      <Circle fill="#019a02" layoutX="823.0" layoutY="28.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="818.0" layoutY="17.0" text="1" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Circle fill="#019a02" layoutX="823.0" layoutY="173.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="818.0" layoutY="162.0" text="2" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Circle fill="#019a02" layoutX="823.0" layoutY="322.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="818.0" layoutY="311.0" text="3" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Circle fill="#019a02" layoutX="823.0" layoutY="467.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Label layoutX="818.0" layoutY="456.0" text="4" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
