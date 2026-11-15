@@ -11,7 +11,7 @@ import com.cevapinxile.minddirector.input.KeyboardListener;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void _main(String[] args) {
         System.setProperty(
           "org.slf4j.simpleLogger.log.io.obswebsocket.community.client",
           "warn"
