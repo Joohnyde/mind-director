@@ -1,10 +1,21 @@
 [
     {
         "name":"Denijal",
-        "avatar":"densen.png"
+        "avatar":"densen.png",
+        "flag":"me"
     },
     {
         "name":"Khrystyna",
-        "avatar":"khrbor.png"
+        "avatar":"khrbor.png",
+        "flag":"ua"
+    },{
+        "name":"Denijal",
+        "avatar":"densen.png",
+        "flag":"me"
+    },
+    {
+        "name":"Khrystyna",
+        "avatar":"khrbor.png",
+        "flag":"ua"
     }
 ]

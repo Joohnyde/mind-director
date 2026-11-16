@@ -18,7 +18,8 @@ public enum InputMode {
     IDLE(new IdleHandler()),
     NONE(new NoneHandler()),
     READ(new ReadHandler()),
-    SINGLE(new SingleHandler());
+    SINGLE(new SingleHandler()),
+    EDIT(new EditHandler());
     
     private final EventHandler handler;
     

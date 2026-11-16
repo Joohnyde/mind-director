@@ -4,6 +4,7 @@
  */
 package com.cevapinxile.minddirector.input;
 
+import com.cevapinxile.minddirector.controllers.GameController;
 import com.cevapinxile.minddirector.controllers.InputController;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
@@ -24,6 +25,7 @@ public final class KeyboardListener implements NativeKeyListener {
     
     private Robot robot;
     private InputController inputController = InputController.getInstance();
+    private GameController gameController = GameController.getInstance();
     private boolean listens = false;
         
     private KeyboardListener() {
@@ -50,12 +52,17 @@ public final class KeyboardListener implements NativeKeyListener {
         if (!listens) {
             return;
         }
-
+        
+        if(inputController.isEditing()){
+            gameController.handleKey(keyCode);
+            return;
+        }
+        
         if (InputController.MODES.containsKey(keyCode)){
             inputController.set(InputController.MODES.get(keyCode));
             return;
         }
-        
+
         if (NativeKeyEvent.VC_1 <= keyCode && keyCode <= NativeKeyEvent.VC_4){
             inputController.selectPlayer(keyCode - NativeKeyEvent.VC_1);
             return;
@@ -67,6 +74,7 @@ public final class KeyboardListener implements NativeKeyListener {
         }
         
         if (keyCode == NativeKeyEvent.VC_ENTER){
+            System.out.println("NIKAKO");
             inputController.confirm();
             return;
         }

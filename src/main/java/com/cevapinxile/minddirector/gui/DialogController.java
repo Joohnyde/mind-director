@@ -8,7 +8,6 @@ import com.cevapinxile.minddirector.Main;
 import com.cevapinxile.minddirector.model.GameState;
 import com.cevapinxile.minddirector.model.Player;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -95,7 +94,11 @@ public class DialogController {
             confirmButton.setDisable(true);
 
             if (GameState.PLAYERS.size() == GameState.NUMBER_OF_PLAYERS) {
-                //Go to main
+                try {
+                    GuiApp.setRoot("mainPane", 1280, 720);
+                } catch (IOException ex) {
+                    System.getLogger(DialogController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
             drawPlayers(allPlayers);
         });
