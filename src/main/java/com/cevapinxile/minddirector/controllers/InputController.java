@@ -29,11 +29,16 @@ public class InputController {
             VC_D, DUEL,
             VC_C, CARDS,
             VC_R, READ,
-            VC_S, SINGLE
+            VC_S, SINGLE,
+            VC_E, EDIT
     );
 
     private InputMode CURRENT_MODE = NONE;
 
+    public boolean isEditing(){
+        return CURRENT_MODE == EDIT;
+    }
+    
     public void set(final InputMode mode) {
         if (CURRENT_MODE == IDLE) {
             switchState(mode);

@@ -9,6 +9,6 @@ package com.cevapinxile.minddirector.model;
  * @author denijal
  */
 public class Player {
-    public String name, avatar;
-    
+    public String name, avatar, flag;
+    public CardNode cards = new CardNode();
 }

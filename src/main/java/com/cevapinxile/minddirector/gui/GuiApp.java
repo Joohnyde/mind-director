@@ -4,12 +4,8 @@
  */
 package com.cevapinxile.minddirector.gui;
 
-import com.cevapinxile.minddirector.Main;
-import com.cevapinxile.minddirector.model.Player;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,14 +13,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -33,18 +21,28 @@ import javafx.scene.layout.GridPane;
 public class GuiApp extends Application {
 
     private static Scene scene;
-
+    private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("playerDialog"), 640, 720);
+        this.stage = stage;
+        setRoot("playerDialog", 640, 720);
+    }
+    
+    static void setRoot(String fxml, int width, int height) throws IOException {
+        scene = new Scene(loadFXML(fxml), width, height);
         stage.setScene(scene);
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int screenWidth = gd.getDisplayMode().getWidth();
+        int screenHeight = gd.getDisplayMode().getHeight();
+        
+        stage.setX((screenWidth - width) / 2);
+        stage.setY((screenHeight - height) / 2);
+        
         stage.show();
     }
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+    
+    
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GuiApp.class.getResource(fxml + ".fxml"));
