@@ -4,9 +4,11 @@
  */
 package com.cevapinxile.minddirector.handlers.impl;
 
+import com.cevapinxile.minddirector.gui.MainController;
 import com.cevapinxile.minddirector.handlers.EditStageHandler;
 import com.cevapinxile.minddirector.model.CardNode;
 import com.cevapinxile.minddirector.model.EditStage;
+import com.cevapinxile.minddirector.util.CardLabel;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ public class NumberEnteringHandler implements EditStageHandler {
 
     private final StringBuilder number = new StringBuilder();
     private CardNode oldCard = null;
+    private CardLabel selectedCard = null;
+    private int playerIndex = -1;
 
     @Override
     public EditStage handleClick(int keyCode) {
@@ -29,15 +33,12 @@ public class NumberEnteringHandler implements EditStageHandler {
         if (keyCode == NativeKeyEvent.VC_BACKSPACE) {
             number.setLength(Math.max(number.length() - 1, 0));
         }
-        System.out.println("INPUT: "+number.toString());
-        //TODO: [UI] Fill the number in the input field
+        selectedCard.showText(number.toString());
         if (keyCode == NativeKeyEvent.VC_ESCAPE) {
             if(this.oldCard == null){
-                System.out.println("Removing mocked card");
-                //TODO: [UI] Remove created "mock" card
+                MainController.removeMock(playerIndex);
             }else {
-                System.out.println("Returning oldcard");
-                //TODO: [UI] Turn back oldCard into a card;
+                selectedCard.showText(selectedCard.card + "");
             }
             EditStage.CARD_SELECTION.getHandler().enter(null);
             return EditStage.CARD_SELECTION;
@@ -56,14 +57,15 @@ public class NumberEnteringHandler implements EditStageHandler {
 
     @Override
     public void enter(Object args) {
-        this.oldCard = (CardNode) args;
+        Object[] arguments = (Object[]) args;
+        playerIndex = (int) arguments[1];
+        this.oldCard = (CardNode) arguments[0];
         if(this.oldCard == null){
-            System.out.println("Adding a mock card");
-            //TODO: [UI] Add "mock" card
+            selectedCard = MainController.mockCard(playerIndex);
         } else {
-            System.out.println("Turning a mock card into a field");
-            //TODO: [UI] Turn oldCard into input field
+            selectedCard = this.oldCard.labels.getFirst();
         }
+        selectedCard.showText("");
         this.number.setLength(0);
     }
 

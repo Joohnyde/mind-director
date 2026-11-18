@@ -4,6 +4,9 @@
  */
 package com.cevapinxile.minddirector.model;
 
+import com.cevapinxile.minddirector.util.CardLabel;
+import java.util.ArrayList;
+
 /**
  *
  * @author denijal
@@ -13,6 +16,7 @@ public class CardNode {
     public int digit = -1;
     public CardNode[] children = new CardNode[10];
     public CardNode parent = null;
+    public ArrayList<CardLabel> labels = new ArrayList();
     public int childrenCount = 0;
     
     @Override

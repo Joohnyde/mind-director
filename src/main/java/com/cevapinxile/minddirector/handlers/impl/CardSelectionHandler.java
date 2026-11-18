@@ -5,12 +5,19 @@
 package com.cevapinxile.minddirector.handlers.impl;
 
 import com.cevapinxile.minddirector.controllers.GameController;
+import com.cevapinxile.minddirector.gui.MainController;
 import com.cevapinxile.minddirector.handlers.EditStageHandler;
 import com.cevapinxile.minddirector.model.CardNode;
 import com.cevapinxile.minddirector.model.EditStage;
 import com.cevapinxile.minddirector.model.GameState;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import java.util.ArrayList;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -18,9 +25,11 @@ import java.util.ArrayList;
  */
 public class CardSelectionHandler implements EditStageHandler {
 
+    private static final Border SELECTED = new Border(new BorderStroke(Color.valueOf("#ffcc00"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(4)));
+
     private static final int VC_PLUS = 3662;
     private static final int VC_MINUS = 3658;
-    
+
     private int playerIndex = -1;
     private CardNode selectedCard = null;
     private boolean dialogShown = false;
@@ -29,14 +38,14 @@ public class CardSelectionHandler implements EditStageHandler {
         if (nextCard == null) {
             return;
         }
-        if(selectedCard.instances != 0){
-            System.out.println("Diselecting card: "+selectedCard);
-            //TODO: [UI] Remove a potential border around nextCard
+        if (selectedCard.instances != 0) {
+            System.out.println("Diselecting card: " + selectedCard);
+            MainController.setBorder(selectedCard, null);
         }
         selectedCard = nextCard;
         if (selectedCard.instances != 0) {
-            System.out.println("Selecting card: "+nextCard);
-            //TODO: [UI] Put a border over the selected card
+            System.out.println("Selecting card: " + nextCard);
+            MainController.setBorder(selectedCard, SELECTED);
         }
     }
 
@@ -48,12 +57,11 @@ public class CardSelectionHandler implements EditStageHandler {
 
         if (dialogShown) {
             if (keyCode == NativeKeyEvent.VC_ENTER && selectedCard.instances != 0) {
-                GameController.getInstance().deleteCard(selectedCard);
+                GameController.getInstance().deleteCard(selectedCard, playerIndex);
             } else {
-                System.out.println("Hide dialog");
-                //TODO: [UI] Hide dialog
             }
             this.dialogShown = false;
+            MainController.setDialog(false, selectedCard == null ? "" : selectedCard.toString());
             return EditStage.CARD_SELECTION;
         }
 
@@ -68,22 +76,25 @@ public class CardSelectionHandler implements EditStageHandler {
 
         if (keyCode == NativeKeyEvent.VC_ESCAPE) {
             EditStage.PLAYER_SELECTION.getHandler().enter(null);
+            if (selectedCard != null) {
+                MainController.setBorder(selectedCard, null);
+            }
             return EditStage.PLAYER_SELECTION;
         }
 
         if (keyCode == NativeKeyEvent.VC_ENTER && selectedCard.instances != 0) {
-            EditStage.NUMBER_ENTERING.getHandler().enter(selectedCard);
+            EditStage.NUMBER_ENTERING.getHandler().enter(new Object[]{selectedCard, playerIndex});
             return EditStage.NUMBER_ENTERING;
         }
 
         if (keyCode == VC_MINUS && selectedCard.instances != 0) {
             dialogShown = true;
             System.out.println("Show dialog");
-            //TODO: [UI] Show 'Are you sure?' dialog
+            MainController.setDialog(true, selectedCard.toString());
         }
 
         if (keyCode == VC_PLUS) {
-            EditStage.NUMBER_ENTERING.getHandler().enter(null);
+            EditStage.NUMBER_ENTERING.getHandler().enter(new Object[]{null, playerIndex});
             return EditStage.NUMBER_ENTERING;
         }
 
@@ -104,9 +115,12 @@ public class CardSelectionHandler implements EditStageHandler {
             final String toAdd = (String) numbers.get(0);
             final CardNode toRemove = (CardNode) numbers.get(1);
             if (toRemove != null) {
-                GameController.getInstance().deleteCard(toRemove);
+                GameController.getInstance().deleteCard(toRemove, playerIndex);
             }
             GameController.getInstance().addCard(toAdd, playerIndex);
+            if(selectedCard != null && selectedCard.instances != 0){
+                MainController.setBorder(selectedCard, null);
+            }
             selectedCard = GameState.PLAYERS.get(playerIndex).cards;
         }
         dialogShown = false;

@@ -1,1 +1,21 @@
-
+[
+    {
+        "name":"Denijal",
+        "avatar":"densen.png",
+        "flag":"me"
+    },
+    {
+        "name":"Khrystyna",
+        "avatar":"khrbor.png",
+        "flag":"ua"
+    },{
+        "name":"Filip",
+        "avatar":"fildra.png",
+        "flag":"ba"
+    },
+    {
+        "name":"Lara",
+        "avatar":"larste.png",
+        "flag":"rs"
+    }
+]

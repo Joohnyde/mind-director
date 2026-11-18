@@ -40,13 +40,14 @@ public class DialogController {
     @FXML
     private Label label;
 
-    Set<Player> loadPlayers() {
+    public static Set<Player> loadPlayers() {
         Player[] allPlayers = {};
         try {
             final ObjectMapper mapper = new ObjectMapper();
-            final InputStream is = Main.class.getResourceAsStream("players.json");
+            final InputStream is = Main.class.getResourceAsStream("players/players.json");
             allPlayers = mapper.readValue(is, Player[].class);
         } catch (IOException ignored) {
+            ignored.printStackTrace();
         }
         return Arrays.stream(allPlayers).collect(Collectors.toSet());
     }
@@ -80,7 +81,7 @@ public class DialogController {
             }
         });
     }
-
+   
     public void initialize() {
         Set<Player> allPlayers = loadPlayers();
         drawPlayers(allPlayers);

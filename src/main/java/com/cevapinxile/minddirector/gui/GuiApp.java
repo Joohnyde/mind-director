@@ -26,7 +26,8 @@ public class GuiApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
-        setRoot("playerDialog", 640, 720);
+//        setRoot("playerDialog", 640, 720);
+        setRoot("mainPane", 1280, 720);
     }
     
     static void setRoot(String fxml, int width, int height) throws IOException {
