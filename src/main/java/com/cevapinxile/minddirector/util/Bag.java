@@ -269,33 +269,6 @@ public class Bag<E extends Comparable<E>> {
         }
     }
 
-    public LinkedList<E> inOrder() {
-        LinkedList<E> result = new LinkedList<>();
-        if (root != null) {
-            addToList(root, result);
-        }
-        return result;
-    }
-
-    private void addToList(Node<E> current, LinkedList<E> order) {
-        if (current.hasLeft()) {
-            addToList(current.getLeft(), order);
-        }
-        for (int i = 0; i < current.getCount(); i++) {
-            if (i == 0) {
-                order.add(current.getData());
-            } else {
-                if (current.getData() instanceof CardLabel) {
-                    order.add((E) new CardLabel((CardLabel) current.getData()));
-                }
-            }
-        }
-        if (current.hasRight()) {
-            addToList(current.getRight(), order);
-        }
-
-    }
-
     public static void printInorder(Bag bag) {
         if (bag.root == null) {
             return;
