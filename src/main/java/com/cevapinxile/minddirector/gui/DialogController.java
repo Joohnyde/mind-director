@@ -47,7 +47,6 @@ public class DialogController {
             final InputStream is = Main.class.getResourceAsStream("players/players.json");
             allPlayers = mapper.readValue(is, Player[].class);
         } catch (IOException ignored) {
-            ignored.printStackTrace();
         }
         return Arrays.stream(allPlayers).collect(Collectors.toSet());
     }

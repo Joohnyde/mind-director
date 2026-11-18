@@ -74,7 +74,6 @@ public class MainController {
     }
 
     public void initialize() throws FileNotFoundException {
-        GameState.PLAYERS.addAll(DialogController.loadPlayers().stream().toList());
         System.setProperty(
                 "org.slf4j.simpleLogger.log.io.obswebsocket.community.client",
                 "warn"
@@ -117,7 +116,7 @@ public class MainController {
     public static void refreshCards(int playerIndex) {
         Platform.runLater(() -> {
             panes[playerIndex].getChildren().clear();
-            Iterator<CardLabel> iterator = CARDS[playerIndex].inOrder().iterator();
+            Iterator<CardLabel> iterator = GameState.PLAYERS.get(playerIndex).cardsInOrder();
             int i = 0;
             while (iterator.hasNext()) {
                 panes[playerIndex].add(iterator.next(), i++, 0);
