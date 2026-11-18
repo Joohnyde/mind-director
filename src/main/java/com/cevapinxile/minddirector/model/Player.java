@@ -4,11 +4,14 @@
  */
 package com.cevapinxile.minddirector.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author denijal
  */
 public class Player {
     public String name, avatar, flag;
+    @JsonIgnore
     public CardNode cards = new CardNode();
 }

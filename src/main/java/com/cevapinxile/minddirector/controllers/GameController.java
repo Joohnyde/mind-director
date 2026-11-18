@@ -4,6 +4,7 @@
  */
 package com.cevapinxile.minddirector.controllers;
 
+import com.cevapinxile.minddirector.gui.MainController;
 import com.cevapinxile.minddirector.model.CardNode;
 import com.cevapinxile.minddirector.model.EditStage;
 import com.cevapinxile.minddirector.model.GameState;
@@ -17,9 +18,6 @@ import com.cevapinxile.minddirector.model.GameState;
 public class GameController {
     private static final GameController INSTANCE = new GameController();
 
-    private final InputController inputController = InputController.getInstance();
-    private EditStage stage = EditStage.PLAYER_SELECTION;
-
     private GameController() {
     }
 
@@ -28,6 +26,9 @@ public class GameController {
     }
 
 
+    private final InputController inputController = InputController.getInstance();
+    private EditStage stage = EditStage.PLAYER_SELECTION;
+    
     public void handleKey(int keyCode) {
         //Delegate keyCode
         final EditStage newStage = stage.getHandler().handleClick(keyCode);
@@ -38,8 +39,11 @@ public class GameController {
         stage = newStage;        
     }
     
-    public void deleteCard(final CardNode toRemove) {
+    public void deleteCard(final CardNode toRemove, int playerIndex) {
         _d(toRemove);
+        //Create a UI card
+        toRemove.labels.removeFirst();
+        MainController.removeCard(toRemove.toString(), playerIndex);
         GameState.printTree();
     }
     private void _d(final CardNode toRemove){
@@ -66,6 +70,7 @@ public class GameController {
         _d(parent);
     }
 
+    
     public void addCard(String toAdd, int playerIndex) {
         if(toAdd == null || toAdd.isBlank() || playerIndex == -1) return;
         CardNode parent = GameState.PLAYERS.get(playerIndex).cards;
@@ -84,8 +89,8 @@ public class GameController {
             parent = newNode;            
         }
         parent.instances++;
-        
-        
+        //Create a UI card
+        parent.labels.add(MainController.addCard(toAdd, playerIndex));
         GameState.printTree();
-    }
+    }    
 }
